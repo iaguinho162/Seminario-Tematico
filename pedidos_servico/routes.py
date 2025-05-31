@@ -9,8 +9,8 @@ router = APIRouter()
 banco_pedidos = {}
 
 # URLs dos outros serviços
-URL_USUARIOS = "http://usuarios:8000"
-URL_PRODUTOS = "http://produtos:8000"
+URL_USUARIOS = "http://users:8000"
+URL_PRODUTOS = "http://products:8000"
 
 # Criar um pedido
 @router.post("/pedidos/", response_model=Pedido)
