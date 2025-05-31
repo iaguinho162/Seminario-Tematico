@@ -1,0 +1,44 @@
+
+services:
+  users:
+    build: ./usuario_servico
+    ports:
+      - "8001:8000"
+    networks:
+      - marketplace
+
+  products:
+    build: ./produtos_servico
+    ports:
+      - "8002:8000"
+    networks:
+      - marketplace
+
+  orders:
+    build: ./pedidos_servico
+    ports:
+      - "8003:8000"
+    networks:
+      - marketplace
+    depends_on:
+      - users
+      - products
+      - rabbitmq
+
+  notifications:
+    build: ./notifications_service
+    networks:
+      - marketplace
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - marketplace
+
+networks:
+  marketplace:
