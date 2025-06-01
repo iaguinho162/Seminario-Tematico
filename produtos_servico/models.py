@@ -7,4 +7,4 @@ class Produto(BaseModel):
     nome: str
     descricao: str
     preco: float
-    estoque: int
+    

@@ -6,3 +6,4 @@ class Usuario(BaseModel):
     id: Optional[int] = None
     nome: str
     email: str
+    cpf: int
