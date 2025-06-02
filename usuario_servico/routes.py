@@ -24,3 +24,20 @@ def obter_usuario(usuario_id: int):
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
     return usuario
+
+#Atualizar usuário
+@router.put("/usuarios/{usuario_id}", response_model=Usuario)
+def atualizar_usuario(usuario_id: int, dados_usuario: Usuario):
+    if usuario_id not in banco_usuarios:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    dados_usuario.id = usuario_id
+    banco_usuarios[usuario_id] = dados_usuario
+    return dados_usuario
+
+#Excluir usuário
+@router.delete("/usuarios/{usuario_id}")
+def deletar_usuario(usuario_id: int):
+    if usuario_id not in banco_usuarios:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    del banco_usuarios[usuario_id]
+    return {"detail": "Usuário deletado com sucesso"}

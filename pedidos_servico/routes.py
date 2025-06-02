@@ -5,6 +5,8 @@ import requests
 import mercadopago
 from fastapi.responses import JSONResponse
 
+
+
 router = APIRouter()
 
 # Banco de dados em memória para pedidos
@@ -19,7 +21,7 @@ ACCESS_TOKEN = "TEST-3547866413447504-053117-35568f2c0ec65d083045cde33e6484f4-57
 sdk = mercadopago.SDK(ACCESS_TOKEN)
 
 
-# 🔸 Criar um pedido
+#Criar um pedido
 @router.post("/pedidos/", response_model=Pedido)
 def criar_pedido(pedido: Pedido):
     # Verificar se o usuário existe
@@ -39,13 +41,13 @@ def criar_pedido(pedido: Pedido):
     return pedido
 
 
-# 🔸 Listar todos os pedidos
+# Listar todos os pedidos
 @router.get("/pedidos/")
 def listar_pedidos():
     return list(banco_pedidos.values())
 
 
-# 🔸 Listar formas de pagamento disponíveis no Mercado Pago
+#Listar formas de pagamento disponíveis no Mercado Pago
 @router.get("/formas-pagamento/", response_model=dict)
 def listar_formas_pagamento():
     url = "https://api.mercadopago.com/v1/payment_methods"
@@ -128,3 +130,5 @@ def criar_pagamento(
         "qr_code_base64": payment.get("point_of_interaction", {}).get("transaction_data", {}).get("qr_code_base64"),
         "link_mercado_pago": payment.get("point_of_interaction", {}).get("transaction_data", {}).get("ticket_url")
     })
+
+
