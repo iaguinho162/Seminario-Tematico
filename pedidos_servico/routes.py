@@ -131,4 +131,9 @@ def criar_pagamento(
         "link_mercado_pago": payment.get("point_of_interaction", {}).get("transaction_data", {}).get("ticket_url")
     })
 
-
+@router.delete("/pedidos/{pedido_id}")
+def deletar_pedido(pedido_id: str):
+    if pedido_id not in banco_pedidos:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado")
+    del banco_pedidos[pedido_id]
+    return {"detail": "Pedido deletado com sucesso"}
