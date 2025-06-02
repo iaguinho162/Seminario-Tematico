@@ -26,3 +26,19 @@ def obter_produto(produto_id: str):
     if not produto:
         raise HTTPException(status_code=404, detail="Produto não encontrado")
     return produto
+
+@router.put("/produtos/{produto_id}", response_model=Produto)
+def atualizar_produto(produto_id: str, dados_produto: Produto):
+    if produto_id not in banco_produtos:
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+    dados_produto.id = produto_id
+    banco_produtos[produto_id] = dados_produto
+    return dados_produto
+
+
+@router.delete("/produtos/{produto_id}")
+def deletar_produto(produto_id: str):
+    if produto_id not in banco_produtos:
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+    del banco_produtos[produto_id]
+    return {"detail": "Produto deletado com sucesso"}
