@@ -17,7 +17,7 @@ URL_USUARIOS = "http://users:8000"
 URL_PRODUTOS = "http://products:8000"
 
 # Token do Mercado Pago
-ACCESS_TOKEN = "TEST-3547866413447504-053117-35568f2c0ec65d083045cde33e6484f4-572486490"
+ACCESS_TOKEN = ""
 sdk = mercadopago.SDK(ACCESS_TOKEN)
 
 
